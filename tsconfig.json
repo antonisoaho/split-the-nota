@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "rootDir": "./ts",
+        "outDir": "./js",
+        "module": "ES2015",
+        "removeComments": true,
+        "preserveConstEnums": true,
+    },
+}

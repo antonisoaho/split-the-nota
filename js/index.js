@@ -1,52 +1,47 @@
-//Dessa är alla variabler du behöver använda. 
-//De ska dock ligga i olika funktioner och inte nedanför.
-
-const tip;
-const sum;
-const numberOfFriends;
-const total;
-const friendSum;
-const sumDivided;
-const calculatedTip;
-const total;
-
-//Hämtar det som skrivits i inputfältet med ID tip
-document.getElementById('tip').value;
-
-function calculateTip(sum, tip) {}
-
-document.getElementById('calculateButton').addEventListener('click', function() {});
-
-//Hämtar det som skrivits i inputfältet med ID sum
-document.getElementById('sum').value;
-
-calculateTip(sum, tip);
-
-sum + calculatedTip;
-
-function divideTotal(total, numberOfFriends) {}
-
-document.getElementById('friendSum').innerHTML = sum + ' kr';
-
-//Returnerar värdet i variablen sumDivided i en funktion
-return sumDivided;
-
-showDividedSum(friendSum);
-
-document.getElementById('showSum').classList.toggle('hide');
-
-total / numberOfFriends;
-
-function showDividedSum(sum) {}
-
-document.getElementById('inputForm').classList.toggle('hide');
-
-sum * tip;
-
-//Returnerar värdet i variablen total i en funktion
-return total;
-
-divideTotal(total, numberOfFriends);
-
-//Hämtar det som skrivits i inputfältet med ID numberOfFriends
-document.getElementById('numberOfFriends').value;
+import { FormData } from './classes/FormData.js';
+const calculateAndSplit = (formData) => {
+    const result = CalculateTip(formData.sum, isNaN(formData.tip) ? 0 : formData.tip, formData.numberOfFriends);
+    displaySum(result.total());
+};
+const CalculateTip = (sum, tip, friends) => {
+    const calculations = {
+        sum: sum,
+        tip: isNaN(tip) ? 0 : tip,
+        numberOfFriends: friends,
+        total: () => {
+            const tipInValue = sum * tip;
+            const totalWithTip = sum + tipInValue;
+            return totalWithTip / friends;
+        },
+    };
+    return calculations;
+};
+const displaySum = (sum) => {
+    if (sum) {
+        document.getElementById('friendSum').textContent = sum.toString();
+    }
+    showHandler();
+    document.getElementById('showSum').addEventListener('click', () => {
+        location.reload();
+    });
+};
+const showHandler = () => {
+    const formElements = document.querySelectorAll('.form');
+    formElements.forEach((element) => {
+        element.classList.toggle('hide');
+    });
+};
+const submitForm = () => {
+    try {
+        const form = new FormData('.form__input');
+        calculateAndSplit(form);
+    }
+    catch (error) {
+        displaySum(error.message);
+    }
+};
+const submitButton = document.getElementById('calculateButton');
+submitButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    submitForm();
+});
