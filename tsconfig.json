@@ -7,4 +7,5 @@
         "removeComments": true,
         "preserveConstEnums": true,
     },
+    "exclude": ["src/index.ts", "src/classes", "src/interfaces"]
 }

@@ -11,11 +11,7 @@ const calculateAndSplit = (formData: FormData): void => {
   displaySum(result.total());
 };
 
-const CalculateTip = (
-  sum: number,
-  tip: number,
-  friends: number
-): SplitCalculations => {
+const CalculateTip = (sum: number, tip: number, friends: number): SplitCalculations => {
   const calculations: SplitCalculations = {
     sum: sum,
     tip: isNaN(tip) ? 0 : tip,
@@ -44,8 +40,7 @@ const displaySum = (sum: any): void => {
 };
 
 const showHandler = (): void => {
-  const formElements: NodeListOf<HTMLElement> =
-    document.querySelectorAll('.form');
+  const formElements: NodeListOf<HTMLElement> = document.querySelectorAll('.form');
 
   formElements.forEach((element) => {
     element.classList.toggle('hide');
